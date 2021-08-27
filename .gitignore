@@ -2,11 +2,15 @@
 postgres-data/*
 
 # Byte-compiled / optimized / DLL files
+.ipynb_checkpoints
 __pycache__/
 *.py[cod]
 
 # C extensions
 *.so
+
+# Output and build files
+data
 
 # Distribution / packaging
 .Python
