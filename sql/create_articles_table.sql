@@ -25,8 +25,8 @@ CREATE TABLE article (
 -- Creation of author table
 CREATE TABLE IF NOT EXISTS author (
     author_id INT NOT NULL,
-    author_first_name TEXT NOT NULL,
-    author_last_name TEXT NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
     PRIMARY KEY (author_id)
 );
 
@@ -48,8 +48,16 @@ CREATE TABLE IF NOT EXISTS collection_articles_collection (
 
 -- Create associative table for article_author
 CREATE TABLE IF NOT EXISTS article_author (
-    article_id INT NULL REFERENCES article(article_id),
-    author_id INT NULL REFERENCES author(author_id),
+    article_id INT REFERENCES article(article_id),
+    author_id INT REFERENCES author(author_id),
     CONSTRAINT pk_article_author
         PRIMARY KEY (article_id, author_id)
+);
+
+-- Create associative table for article_publisher
+CREATE TABLE IF NOT EXISTS article_publisher (
+    article_id INT REFERENCES article(article_id),
+    publisher_id INT REFERENCES publisher(publisher_id),
+    CONSTRAINT pk_article_publisher
+        PRIMARY KEY (article_id, publisher_id)
 );
