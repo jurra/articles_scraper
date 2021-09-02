@@ -14,6 +14,7 @@ CREATE TABLE article (
     datetime_accessed TIMESTAMP,
     title TEXT NOT NULL,
     full_text TEXT NOT NULL,
+    article_link TEXT NOT NULL,
     publisher_id INT NOT NULL,
     PRIMARY KEY (article_id),
     CONSTRAINT fk_publisher

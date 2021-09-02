@@ -1,6 +1,10 @@
 .DS_Store
 postgres-data/*
 
+**/*.db
+**/*.db-journal
+
+
 # Byte-compiled / optimized / DLL files
 .ipynb_checkpoints
 __pycache__/
@@ -29,3 +33,6 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# For dev purposes
+**/config.py
