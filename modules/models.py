@@ -18,12 +18,12 @@ collection_articles_collection = Table(
     Column('article_id', Integer, ForeignKey('article.id'))
 )
 
-# article_publisher = Table(
-#     'article_publisher',
-#     Base.metadata,
-#     Column('article_id', Integer, ForeignKey('article.id')),
-#     Column('publisher_id', Integer, ForeignKey('publisher.id'))
-# )
+article_publisher = Table(
+    'article_publisher',
+    Base.metadata,
+    Column('article_id', Integer, ForeignKey('article.id')),
+    Column('publisher_id', Integer, ForeignKey('publisher.id'))
+)
 
 class Article(Base):
     __tablename__ = 'article'

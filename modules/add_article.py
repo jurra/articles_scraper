@@ -3,7 +3,7 @@ This module provides functions to add new articles to the database.
 postgresql database
 """
 from importlib import resources
-from sqlalchemy.sql import asc, desc, func
+from sqlalchemy.sql import asc, desc, func, and_, or_
 from modules.models import Article, Publisher, Collection, Author
 
 # Add new article

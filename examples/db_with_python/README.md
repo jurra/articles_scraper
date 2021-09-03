@@ -63,3 +63,7 @@ project
 - Sessions
 - Tables
 - Relationships
+
+## Summary
+- Learned how to do basic operations with SQLalchemy
+- Got a perspective on how you work with SQLAlchemy

@@ -1,4 +1,6 @@
-# Python / SQLite /SQLAlchemy article
+# Data Management With Python, SQLite, and SQLAlchemy
+https://realpython.com/python-sqlite-sqlalchemy/
+
 
 This repository contains the content and example code
 for the Python / SQLite / SQLAlchemy article I'm writing
