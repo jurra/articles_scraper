@@ -4,13 +4,43 @@ postgresql database
 """
 from importlib import resources
 from sqlalchemy.sql import asc, desc, func, and_, or_
-from modules.models import Article, Publisher, Collection, Author
+from modules.models import Article, Publisher, Author
+
+def simply_add_new_article(
+    session, 
+    title,
+    full_text,
+    article_link,
+    accessed_date,
+    publishing_date,):
+    """Add new article to the database"""
+    # Check if article already exists
+    article = (
+        session.query(Article)
+        .filter(Article.title == title)
+        .one_or_none()
+    )
+
+    # Does the article already exist?
+    if article is None:
+        article = Article(
+            title=title,
+            full_text=full_text,
+            article_link=article_link,
+            accessed_date=accessed_date,
+            publishing_date=publishing_date
+            )
+        session.add(article)
+        session.commit()
+        print(f'Article "{title}" added to the database')
+    else:
+        print(f'Article "{title}" already exists in the database')
 
 # Add new article
 def add_new_article(
     session, 
-    article_title,
-    article_text, 
+    title,
+    full_text, 
     article_link,
     accessed_date,
     publishing_date,
@@ -26,7 +56,7 @@ def add_new_article(
         session.query(Article)
         .filter(
             and_(
-                Article.title == article_title, 
+                Article.title == title, 
                 Article.author_first_name == first_name, 
                 Article.author_last_name == last_name
             )
@@ -43,7 +73,7 @@ def add_new_article(
     article_by_author = (
         session.query(Article)
         .join(Author)
-        .filter(Article.title == article_title)
+        .filter(Article.title == title)
         .filter( and_(
             Author.first_name == first_name,
             Author.last_name == last_name
@@ -54,9 +84,9 @@ def add_new_article(
     # Create new article if needed
     if article_by_author is None:
         article = Article(
-            title=article_title,
-            text=article_text,
-            link=article_link,
+            title=title,
+            full_text=full_text,
+            article_link=article_link,
             accessed_date=accessed_date,
             publishing_date=publishing_date
             )
@@ -100,5 +130,5 @@ def add_new_article(
 
     # Commit the changes
     session.commit()
-    print(f'Article "{article_title}" added to the database')
+    print(f'Article "{title}" added to the database')
 
