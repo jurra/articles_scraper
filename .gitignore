@@ -3,7 +3,7 @@ postgres-data/*
 
 **/*.db
 **/*.db-journal
-
+**/postgres-data
 
 # Byte-compiled / optimized / DLL files
 .ipynb_checkpoints

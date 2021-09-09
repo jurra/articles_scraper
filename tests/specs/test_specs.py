@@ -12,14 +12,13 @@ from examples.my_articles_setup.config import config
 # Postgres username, password, and database name
 params = config()
 
-postgres_str = ('postgresql+psycopg2://{username}:{password}@{ipaddress}:{port}/{dbname}'
+postgres_str = ('postgresql+psycopg2://{username}:{password}@{ipaddress}:{port}'
 .format(
     username=params["user"],
     password=params["password"],
     ipaddress=params["host"],
     dbname=params["database"],
-    port=5432)
-)
+    port=params["port"]))
 
 # Create the connection
 cnx = create_engine(postgres_str)

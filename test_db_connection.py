@@ -33,7 +33,8 @@ def connect():
             conn.close()
             print('Database connection closed.')
             return True
-
+    
+    assert conn == True
 
 if __name__ == '__main__':
     connect()
