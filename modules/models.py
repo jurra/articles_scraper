@@ -30,7 +30,7 @@ class Article(Base):
     __tablename__ = 'article'
     id = Column(Integer, primary_key=True)
     title = Column(String)
-    accessed_date = Column(String)
+    # accessed_date = Column(String)
     publishing_date = Column(String)
     # description = Column(String)
     full_text = Column(String)
@@ -50,8 +50,8 @@ class Article(Base):
 class Author(Base):
     __tablename__ = 'author'
     id = Column(Integer, primary_key=True)
-    first_name = Column(String)
-    last_name = Column(String)
+    name = Column(String)
+    # last_name = Column(String)
     # article_id = Column(Integer, ForeignKey('article.id'))
     # publisher_id = Column(Integer, ForeignKey('publisher.id'))
 

@@ -11,9 +11,9 @@ def simply_add_new_article(
     title,
     full_text,
     article_link,
-    accessed_date,
+    # accessed_date,
     publishing_date,):
-    """Add new article to the database"""
+    """Adds new article to the database"""
     # Check if article already exists
     article = (
         session.query(Article)
@@ -27,7 +27,7 @@ def simply_add_new_article(
             title=title,
             full_text=full_text,
             article_link=article_link,
-            accessed_date=accessed_date,
+            # accessed_date=accessed_date,
             publishing_date=publishing_date
             )
         session.add(article)
@@ -42,14 +42,14 @@ def add_new_article(
     title,
     full_text, 
     article_link,
-    accessed_date,
+    # accessed_date,
     publishing_date,
     author_name, 
     publisher_name,
     publisher_url):
     """Add new article to the database"""
     # Get author's first and last name
-    first_name, last_name = author_name.partition(' ')[0], author_name.partition(' ')
+    name, last_name = author_name.partition(' ')[0], author_name.partition(' ')
     
     # Check if article already exists
     article = (
@@ -57,7 +57,7 @@ def add_new_article(
         .filter(
             and_(
                 Article.title == title, 
-                Article.author_first_name == first_name, 
+                Article.author_name == name, 
                 Article.author_last_name == last_name
             )
         )
@@ -75,8 +75,7 @@ def add_new_article(
         .join(Author)
         .filter(Article.title == title)
         .filter( and_(
-            Author.first_name == first_name,
-            Author.last_name == last_name
+            Author.name == name,
         ))
         .one_or_none()
     )
@@ -87,24 +86,19 @@ def add_new_article(
             title=title,
             full_text=full_text,
             article_link=article_link,
-            accessed_date=accessed_date,
             publishing_date=publishing_date
             )
 
     # Get the author 
     author = (
         session.query(Author)
-        .filter(
-            and_(
-                Author.first_name == first_name, 
-                Author.last_name == last_name)
-        )
+        .filter(Author.name == name)
         .one_or_none()
     )
 
     # Do we need to create the author?
     if author is None:
-        author = Author(first_name=first_name, last_name=last_name)
+        author = Author(name=name)
         session.add(author)
 
     # Get the publisher
