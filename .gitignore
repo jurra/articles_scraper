@@ -9,6 +9,7 @@ postgres-data/*
 .ipynb_checkpoints
 __pycache__/
 *.py[cod]
+.pytest_cache/
 
 # C extensions
 *.so

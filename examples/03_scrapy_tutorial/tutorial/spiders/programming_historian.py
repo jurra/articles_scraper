@@ -7,27 +7,26 @@ class ArticleSpider(scrapy.Spider):
 
     def parse(self, response):
         self.logger.info(f'Parse funcion called on {response.url}')
-        # for article in response.css('div.lesson-description'):
-        #     # loader = ItemLoader(item=Article(), selector=article)
-        #     # loader.add_css('title', 'h2.title::text')
-        #     # loader.add_css('date', 'time::text')
-        #     # loader.add_css('description', 'p.description::text')
-        #     # loader.add_css('url', 'a::attr(href)')
-        #     # yield loader.load_item()
-        #     article_url = article.css('a::attr(href)').get()
-        #     yield response.follow(article_url, 
-        #             self.parse_article, 
-        #         # meta={'article': article_item}
-        #     )
+        for article in response.css('div.lesson-description'):
+            # loader = ItemLoader(item=Article(), selector=article)
+            # loader.add_css('title', 'h2.title::text')
+            # loader.add_css('date', 'time::text')
+            # loader.add_css('description', 'p.description::text')
+            # loader.add_css('url', 'a::attr(href)')
+            # yield loader.load_item()
+            article_url = article.css('a::attr(href)').get()
+            yield response.follow(article_url, 
+                    self.parse_article, 
+                # meta={'article': article_item}
+            )
 
         # BUILT FOR TESTING PURPOSES
         query = response.css('div.lesson-description')
         article_url = query.css('a::attr(href)').get()
         yield response.follow(article_url, 
-                self.parse_article, 
-                # meta={'article': article_item}
-        )
+                self.parse_article)
             
+        # NEXT PAGE OF ARTICLES LIST
     
     def parse_article(self, response):
         # article_item = response.meta['article']
@@ -54,10 +53,6 @@ class ArticleSpider(scrapy.Spider):
             'title': t,
             'author_name': a,
             'published_date': p,
-            
-            # Get date from scrapy.Request
-            
-
             # 'accessed_date': scrapy.Request.meta['date'],
             # 'text': ''.join(c),
             'article_link': response.url

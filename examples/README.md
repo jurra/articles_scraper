@@ -8,15 +8,20 @@
 - How it should be for more reusability and interoperability. The need for a database
 
 ## Stack selection and design
-- postgresql
+- **postgresql**
     1. **Full text search** Postgres can easily store vector representations of text you're storing and allow super fast queries on it. This is handy for things like autocompleting search fields in websites, as well as data science projects using natural language processing.
     2. **portable server**
 
-- SQLAlchemy
+- **Docker and docker-compose** We use docker to easily run an instance of a postgresql database locally or on a server. The database instance runs on this isolated container that we will be using as a microservice to push and retrieve data.
+
+- **SQLAlchemy** We use SQLAlchemy to interoperate with the database in a ORM style. This library will be used within the scrapy pipelin to push scraped data to the database.
+
+
+- **Scrapy**: A sophistcated framework to scrape content online. SQLAlchemy  
+
 
 - Alembic: is used as part of the iteration of modeling tables and relationships
 
-- scrapy
 - docker and docker-compose workflow
 
 ### Some mistakes I made in previous designs
