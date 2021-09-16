@@ -3,7 +3,7 @@ from scrapy.loader import ItemLoader
 from src.items import ArticleItem
 
 class ArticleSpider(scrapy.Spider):
-    name = 'programming_historian'
+    name = 'example'
     start_urls = ['https://programminghistorian.org/en/lessons/']
 
     def parse(self, response):

@@ -1,15 +1,21 @@
 # Pipeline for articles scraping with scrapy, postgres and sqlalchemy
-- Describe the type of study 
-- Describe the stack
-- Describe how to use it
+A simple customizable pipeline to capture articles in a specific format for text analysis. 
+
+## Features
+- Setup database easily with `docker-compose` 
+- Define your own crawlers and pipelines
+- Predefined database model to start collecting data
+
 
 ## Entity relationship diagram
+![](./docs/img/DB_diagram.png)
 
-## Creating and filling a Postgres DB with Docker Compose
-
-This project create tables and fill the tables in a Postgres data base. The tables and data that create are in sql/ folder
-
-Read the explanation here [Creating and filling a Postgres DB with Docker compose](https://levelup.gitconnected.com/creating-and-filling-a-postgres-db-with-docker-compose-e1607f6f882f)
+## Usage
+- We recommend to create a specific virtual environment for the project
+- Run `pip install -e .` to develop and modify modules.
+- Run `scrapy crawl example`
+- Run the `example.ipynb` notebook to explore the database.
+- Enjoy :)
 
 
 
