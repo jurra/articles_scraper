@@ -1,6 +1,6 @@
 import scrapy
 from scrapy.loader import ItemLoader
-from tutorial.items import ArticleItem
+from src.items import ArticleItem
 
 class ArticleSpider(scrapy.Spider):
     name = 'programming_historian'

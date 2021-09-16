@@ -5,7 +5,7 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-from tutorial.models import *
+from src.models import *
 
 from scrapy.item import Item, Field
 from scrapy.loader.processors import MapCompose

@@ -4,7 +4,7 @@ postgresql database
 """
 from importlib import resources
 from sqlalchemy.sql import asc, desc, func, and_, or_
-from tutorial.models import Article, Publisher, Author
+from src.models import Article, Publisher, Author
 
 def simply_add_new_article(
     session, 

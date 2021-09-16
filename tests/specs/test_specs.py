@@ -1,13 +1,13 @@
 # from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from tutorial.models import *
+from src.models import *
 
 import pandas
 
 from datetime import *
 
 from config import config
-from tutorial.add_article import *
+from src.add_article import *
 
 # Postgres username, password, and database name
 params = config()

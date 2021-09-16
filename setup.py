@@ -6,7 +6,7 @@ setup(
     name="articles_mining",
     version="1.0",
     packages=find_packages(),
-    entry_points = {'scrapy': ['settings = tutorial.settings']},
+    entry_points = {'scrapy': ['settings = src.settings']},
     install_requires=[
         "pandas",
         "Flask==1.1.1",
