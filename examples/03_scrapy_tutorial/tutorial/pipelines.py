@@ -7,15 +7,14 @@
 from itemadapter import ItemAdapter
 from tutorial.models import *
 
+from scrapy.item import Item, Field
+from scrapy.loader.processors import MapCompose
+
 # import session maker from SQLAlchemy
 from sqlalchemy.orm import sessionmaker
 
 
-class TutorialPipeline:
-    def process_item(self, item, spider):
-        return item
-
-class SavesArticlesPipeline(object):
+class ArticlesPipeline(object):
     def __init__(self):
         '''
         Initializes database connection and session maker
@@ -24,6 +23,7 @@ class SavesArticlesPipeline(object):
         engine = db_connect()
         create_table(engine)
         self.Session = sessionmaker(bind=engine)
+        print("Connected successfully to database")
 
         
     def process_item(self, item, spider):
@@ -32,14 +32,20 @@ class SavesArticlesPipeline(object):
         The method is called for every ArticleItem
         '''
         session = self.Session()
-        article = Article(**item)
+        a = Article()
+        a.title = item['title']
+        a.article_link = item['article_link']
+        a.full_text = item['full_text']
+        a.publishing_date = item['publishing_date']
 
         try:
-            session.add(article)
+            session.add(a)
             session.commit()
+            print("Article sucessfully added")
         except:
             session.rollback()
-            raise
+            print('Failed to add article')
+            raise 
         finally:
             session.close()
 

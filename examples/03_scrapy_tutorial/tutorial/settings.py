@@ -7,6 +7,9 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+from tutorial.pipelines import ArticlesPipeline
+
+
 BOT_NAME = 'tutorial'
 
 SPIDER_MODULES = ['tutorial.spiders']
@@ -63,7 +66,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'tutorial.pipelines.TutorialPipeline': 300,
+   # 'tutorial.pipelines.TutorialPipeline': 300,
+   'tutorial.pipelines.ArticlesPipeline': 300
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
