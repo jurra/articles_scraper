@@ -1,13 +1,13 @@
-from sqlalchemy import create_engine
+# from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from modules.models import *
-from modules.add_article import *
+from tutorial.models import *
 
 import pandas
 
 from datetime import *
 
-from examples.my_articles_setup.config import config
+from config import config
+from tutorial.add_article import *
 
 # Postgres username, password, and database name
 params = config()
@@ -20,11 +20,9 @@ postgres_str = ('postgresql+psycopg2://{username}:{password}@{ipaddress}:{port}'
     dbname=params["database"],
     port=params["port"]))
 
-# Create the connection
-cnx = create_engine(postgres_str)
-Base.metadata.bind = cnx
-Base.metadata.create_all(cnx)
-
+# Connect to database and initialize a session
+cnx = db_connect()
+create_table(cnx)
 Session = sessionmaker(bind=cnx)        
 s = Session()  
 

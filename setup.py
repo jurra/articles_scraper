@@ -3,9 +3,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="project",
+    name="articles_mining",
     version="1.0",
     packages=find_packages(),
+    entry_points = {'scrapy': ['settings = tutorial.settings']},
     install_requires=[
         "pandas",
         "Flask==1.1.1",
@@ -16,6 +17,6 @@ setup(
         "Flask-WTF==0.14.3",
         "python-dateutil==2.8.1",
         "python-dotenv==0.10.5",
-        "treelib",
+        "treelib"
     ],
 )

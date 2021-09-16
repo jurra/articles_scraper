@@ -1,8 +1,33 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Table
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Table
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
+from scrapy.utils.project import get_project_settings
+from config import config
+
+
+# Postgres username, password, and database name
+params = config()
+postgres_str = ('postgresql+psycopg2://{username}:{password}@{ipaddress}:{port}'
+.format(
+    username=params["user"],
+    password=params["password"],
+    ipaddress=params["host"],
+    dbname=params["database"],
+    port=params["port"]))
+
 Base = declarative_base()
+
+def db_connect():
+    """
+    Performs database connection using database settings from settings.py.
+    Returns sqlalchemy engine instance
+    """
+    return create_engine(postgres_str)
+
+def create_table(engine):
+    Base.metadata.create_all(engine)
+
 
 article_author = Table(
     'article_author',
