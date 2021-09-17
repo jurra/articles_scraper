@@ -12,6 +12,8 @@ setup(
         "SQLAlchemy==1.3.13",
         "python-dateutil==2.8.1",
         "python-dotenv==0.10.5",
-        "psycopg2-binary==2.9.1"
+        "psycopg2-binary==2.9.1",
+        "scrapy==2.5.0"
+        "pytest=6.2.5",
     ],
 )

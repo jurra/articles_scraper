@@ -20,6 +20,7 @@ data
 # Distribution / packaging
 .Python
 envs/
+venv/
 build/
 develop-eggs/
 dist/
