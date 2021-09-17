@@ -11,9 +11,10 @@ A simple customizable pipeline to capture articles in a specific format for text
 ![](./docs/img/DB_diagram.png)
 
 ## Usage
-- We recommend to create a specific virtual environment for the project
+- We recommend to create a specific virtual environment for the project. 
+    - For instance you can do with python 3: `python3 -m venv my-env`. Activate it in Unix `source my-env/bin/activate`.
 - Run `pip install -e .` to develop and modify modules.
-- Run `docker-compose up -d` to spin the postgres database instnace.
+- Run `docker-compose up -d` to spin the postgres database instance.
 - Run `pytest` to check that everything is setup,
 - Run `scrapy crawl example`
 - Run the `example.ipynb` notebook to explore the database.
