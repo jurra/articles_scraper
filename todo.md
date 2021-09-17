@@ -1,11 +1,7 @@
 ## Next steps
-- [ ] Add articles to items
-- [ ] Add item to the pipeline and the database
-- [ ] 
+- [x] Add articles to items
+- [x] Add item to the pipeline and the database 
 
-## Todo:
-- [ ] write crud module properly
-- [ ] Write the db properly from SQLAlchemy
 
 ## Feature: add_new_article to database
 - [x] Done in a simply add article unit tests
