@@ -10,6 +10,7 @@ postgres-data/*
 __pycache__/
 *.py[cod]
 .pytest_cache/
+venv/
 
 # C extensions
 *.so
