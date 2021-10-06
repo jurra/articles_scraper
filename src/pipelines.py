@@ -9,9 +9,10 @@ from src.models import *
 
 from scrapy.item import Item, Field
 from scrapy.loader.processors import MapCompose
+from scrapy.exceptions import DropItem
 
 # import session maker from SQLAlchemy
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import session, sessionmaker
 
 
 class ArticlesPipeline(object):
@@ -83,3 +84,22 @@ class ArticlesPipeline(object):
             session.close()
 
         return item
+
+class DuplicatesPipeline(object):
+    def __init__(self):
+        '''
+        Initializes database connection and session maker
+        Creates tables
+        '''
+        engine = db_connect()
+        create_table(engine)
+        self.Session = sessionmaker(bind=engine)
+        print("Connected successfully to database")
+        
+    def process_item(self, item, spider):
+        session = self.Session()
+        exist_article = session.query(Article).filter(Article.title == item['title']).count()
+        if exist_article > 0:
+            raise DropItem("Duplicate item found: %s" % item)
+        else:
+            return item

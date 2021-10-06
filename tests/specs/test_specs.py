@@ -1,5 +1,6 @@
 # from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import delete
 from src.models import *
 
 import pandas
@@ -53,9 +54,14 @@ def test_add_article():
     assert a.title == article_from_db.title
     
     # Remove the article from the database and commit changes
-    s.delete(article_from_db)
-    s.commit()
+    # Delete the article from the database
+    # Delete the author from the database
+    au = s.query(Author).filter_by(name="Felo Crawley").first()
+    a = s.query(Article).filter_by(title="Example Title").first()
+    s.delete(au)
+    s.delete(a)
     
+    s.commit()
 
 # close sessions
 s.close_all()
