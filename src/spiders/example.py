@@ -5,6 +5,8 @@ from src.items import ArticleItem
 class ArticleSpider(scrapy.Spider):
     name = 'example'
     start_urls = ['https://programminghistorian.org/en/lessons/']
+    # collection = name
+    # description = "A ver popular website for digital humanities"
 
     def parse(self, response):
         self.logger.info(f'Parse funcion called on {response.url}')
@@ -21,12 +23,15 @@ class ArticleSpider(scrapy.Spider):
         # article_item = response.meta['article']
         self.logger.info(f'Parse article funcion called on {response.url}')
         
+        # get article title
         t = response.css('div.header-title')
         t = t.css('a::text').get()
 
+        # get the article author
         a = response.css('div.header-author')
         a = a.css('h2::text').get().strip()
 
+        # get the article content
         c = response.css('div.content')
         c = c.css('h1::text,h2::text,h3::text,a::text,p::text').getall()
         
@@ -43,9 +48,11 @@ class ArticleSpider(scrapy.Spider):
 
         loader = ItemLoader(item=ArticleItem(), selector=response)
         loader.add_value('title', t)
-        loader.add_value('name', a)
+        loader.add_value('author_name', a)
         loader.add_value('full_text', c)
         loader.add_value('publishing_date', p)
+        # loader.add_value('collection', self.collection)
+        # loader.add_value('collection_description', self.description)
         loader.add_value('article_link', response.url)
         article_item = loader.load_item()
 
