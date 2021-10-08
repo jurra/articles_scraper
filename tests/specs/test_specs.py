@@ -1,5 +1,6 @@
 # from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import delete
 from src.models import *
 
 import pandas
@@ -27,18 +28,22 @@ Session = sessionmaker(bind=cnx)
 s = Session()  
 
 def test_add_article():
+    # Create Article object
     a = Article(
     title="Example Title",
     full_text="Example Text", 
     article_link="http://example.com",
     # accessed_date=pandas.Timestamp("2018-01-01 00:00:00"),
-    publishing_date=pandas.Timestamp("2018-01-01 00:00:00"),)
+    publishing_date=pandas.Timestamp("2018-01-01 00:00:00"),
+    )
 
-    # Add new simple article
+    # Add Article object to session
     simply_add_new_article(s, title=a.title,
                            full_text=a.full_text,
                            article_link=a.article_link,
-                           publishing_date=a.publishing_date)
+                           publishing_date=a.publishing_date,
+                           author = "Felo Crawley"
+                           )
 
     # Get article from the databse
     try:
@@ -49,9 +54,14 @@ def test_add_article():
     assert a.title == article_from_db.title
     
     # Remove the article from the database and commit changes
-    s.delete(article_from_db)
-    s.commit()
+    # Delete the article from the database
+    # Delete the author from the database
+    au = s.query(Author).filter_by(name="Felo Crawley").first()
+    a = s.query(Article).filter_by(title="Example Title").first()
+    s.delete(au)
+    s.delete(a)
     
+    s.commit()
 
 # close sessions
 s.close_all()

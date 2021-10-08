@@ -18,3 +18,8 @@ def config(filename='database.ini', section='postgresql'):
         raise Exception('Section {0} not found in the {1} file'.format(section, filename))
 
     return db
+
+def get_db_uri():
+    params = config()
+    db_uri = "postgresql://{}:{}@{}:{}".format(params['user'], params['password'], params['host'], params['port'], params['database'])
+    return db_uri

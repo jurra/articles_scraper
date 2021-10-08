@@ -14,6 +14,7 @@ setup(
         "python-dotenv==0.10.5",
         "psycopg2-binary==2.9.1",
         "scrapy==2.5.0",
-        "pytest==6.2.5"
+        "pytest==6.2.5",
+        "alembic==1.7.3"
     ],
 )

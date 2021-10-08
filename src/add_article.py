@@ -12,7 +12,8 @@ def simply_add_new_article(
     full_text,
     article_link,
     # accessed_date,
-    publishing_date,):
+    publishing_date,
+    author):
     """Adds new article to the database"""
     # Check if article already exists
     article = (
@@ -28,8 +29,15 @@ def simply_add_new_article(
             full_text=full_text,
             article_link=article_link,
             # accessed_date=accessed_date,
-            publishing_date=publishing_date
-            )
+            publishing_date=publishing_date,
+        )
+
+        # If author of article doesnt exist create it
+        au = Author(
+            name=author
+        )
+
+        article.authors.append(au)
         session.add(article)
         session.commit()
         print(f'Article "{title}" added to the database')
