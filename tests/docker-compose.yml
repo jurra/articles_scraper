@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+    postgres:
+        image: postgres:10.5
+        restart: always
+        environment: 
+          - POSTGRES_DBNAME=database
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=postgres
+        logging:
+          options:
+            max-size: 10m
+            max-file: "3"
+        ports:
+          - '5532:5432'
+        volumes:
+          - ./postgres-data:/var/lib/postgresql/data
+
+    static-website:
+        image: nginx
+        working_dir: /blog
+        restart: always
+        volumes:
+          - ./blog/dist:/usr/share/nginx/html
+        ports:
+          - '5080:80'
+
+volumes:
+  postgres-data:
+  static-website:
