@@ -21,5 +21,5 @@ def config(filename='database.ini', section='postgresql'):
 
 def get_db_uri():
     params = config()
-    db_uri = "postgresql://{}:{}@{}:{}".format(params['user'], params['password'], params['host'], params['port'], params['database'])
+    db_uri = "postgresql+psycopg2://{}:{}@{}:{}".format(params['user'], params['password'], params['host'], params['port'], params['database'])
     return db_uri
