@@ -15,10 +15,16 @@ services:
           - '5332:5432'
         volumes:
           - ./postgres-data:/var/lib/postgresql/data
-          # copy the sql script to create tables
-          # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-          # copy the sql script to fill tables
-          # - ./sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+
+    static-website:
+        image: nginx
+        working_dir: /blog
+        restart: always
+        volumes:
+          - ./tests/blog/dist:/usr/share/nginx/html
+        ports:
+          - '5080:80'
 
 volumes:
   postgres-data:
+  static-website:

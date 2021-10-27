@@ -3,18 +3,11 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
 from scrapy.utils.project import get_project_settings
-from config import config
+from config import config, get_db_uri
 
 
 # Postgres username, password, and database name
-params = config()
-postgres_str = ('postgresql+psycopg2://{username}:{password}@{ipaddress}:{port}'
-.format(
-    username=params["user"],
-    password=params["password"],
-    ipaddress=params["host"],
-    dbname=params["database"],
-    port=params["port"]))
+postgres_str = get_db_uri()
 
 Base = declarative_base()
 
@@ -72,7 +65,6 @@ class Article(Base):
     authors = relationship("Author",
                                 secondary=article_author,
                                 back_populates="articles")
-
     publishers = relationship("Publisher",
                                 secondary=article_publisher, 
                                 back_populates="articles")
@@ -94,7 +86,6 @@ class Author(Base):
     articles = relationship("Article",
                             secondary=article_author, 
                             back_populates="authors")
-
     publishers = relationship("Publisher",
                             secondary=author_publisher,
                             back_populates="authors")
