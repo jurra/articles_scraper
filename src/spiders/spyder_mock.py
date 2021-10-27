@@ -8,9 +8,12 @@ import scrapy
 from scrapy.loader import ItemLoader
 from src.items import ArticleItem
 
+
 class Mock(scrapy.Spider):
     name = 'Mock'
-    
+
+    # Here I am not using at the moment the mock because its
+    # being declared in the test file itself
     def parse_article(self):
         loader = ItemLoader(item=ArticleItem(), response=None)
         article_item = loader.load_item()
