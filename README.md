@@ -1,11 +1,18 @@
 # Pipeline for articles scraping with scrapy, postgres and sqlalchemy
 A simple customizable pipeline to capture articles in a specific format for text analysis. 
 
+Hey there! I made this repository to practice basic scrapinng and sql. The motivation behind the project was to setup a simple pipeline to store articles that then can be analyzed using postgresql and jupyter-notebooks. This is not optimal for advanced text querying and NPL but is a good basis, for the Obtaining part of data analysis. 
+
+## Stack
+- Scrapy for getting and preprocessing data
+- Postgresql to store data in a structured way
+- SQLAlchemy to write database relationships, models, and talk to the database
+- Alembic to handle migrations
+
 ## Features
 - Setup database easily with `docker-compose` 
 - Define your own crawlers and pipelines
 - Predefined database model to start collecting data
-
 
 ## Entity relationship diagram
 ![](./docs/img/DB_diagram.png)
@@ -18,6 +25,7 @@ A simple customizable pipeline to capture articles in a specific format for text
 - Run `pytest` to check that everything is setup,
 - Run `scrapy crawl example`
 - Run the `example.ipynb` notebook to explore the database.
+- Write your own scrapers to get your data
 - Enjoy :)
 
 ## References
